@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Techvera Solution - Under Maintenance</title>
+    <style>
+        :root {
+            --primary-color: #00c6ff;
+            --accent-color: #0072ff;
+            --bg-dark: #0a0a0b;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --text-main: #ffffff;
+            --text-dim: #a0a0a0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Animated background glow */
+        body::before {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--accent-color), transparent 70%);
+            top: 10%;
+            left: 10%;
+            filter: blur(80px);
+            opacity: 0.15;
+            z-index: -1;
+            animation: move 20s infinite alternate;
+        }
+
+        @keyframes move {
+            from { transform: translate(0, 0); }
+            to { transform: translate(100px, 100px); }
+        }
+
+        .container {
+            max-width: 480px;
+            width: 92%;
+            padding: 40px;
+            border-radius: 24px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container {
+            margin-bottom: 20px;
+        }
+
+        .logo-img {
+            width: 284px;
+   	    height: 186px;
+            object-fit: contain;
+            /* Fallback style if image is missing */
+            background: var(--glass-bg);
+            border-radius: 16px;
+        }
+
+        .brand {
+            font-size: 14px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 8px;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        p {
+            font-size: 15px;
+            color: var(--text-dim);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        input[type="email"], textarea {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        input:focus, textarea:focus {
+            border-color: var(--primary-color);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 0 4px rgba(0, 198, 255, 0.1);
+        }
+
+        textarea {
+            resize: none;
+            height: 90px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -10px var(--primary-color);
+            filter: brightness(1.1);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .success-message {
+            display: none;
+            padding: 20px;
+            background: rgba(0, 255, 174, 0.1);
+            border-radius: 12px;
+            color: #00ffae;
+            border: 1px solid rgba(0, 255, 174, 0.2);
+            margin-top: 20px;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dim);
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="logo-container">
+            <!-- Replace 'your-logo.png' with your actual file -->
+            <img src="techvera.jpeg" class="logo-img" alt="techvera">
+        </div>
+
+        <div class="brand">Techvera Solution</div>
+        <h1>Under Maintenance</h1>
+        <p>
+		We’re upgrading our systems to serve you better.
+		For business inquiries, please leave your email and we’ll contact you shortly.
+        </p>
+
+        <form id="contact-form" action="https://formspree.io/f/xwvwkaba" method="POST">
+            <div class="form-group">
+                <input type="email" name="email" placeholder="Email Address" required>
+            </div>
+
+            <div class="form-group">
+                <textarea name="message" placeholder="How can we help you? (Optional)"></textarea>
+            </div>
+
+            <button type="submit" id="submitBtn">Notify Me</button>
+        </form>
+
+        <div class="success-message" id="successMessage">
+            <strong>✨ You're on the list!</strong><br>
+            We'll reach out to you shortly.
+        </div>
+
+        <div class="footer">&copy; 2026 Techvera Solution</div>
+    </div>
+
+    <script>
+        const form = document.getElementById('contact-form');
+        const successMessage = document.getElementById('successMessage');
+        const submitBtn = document.getElementById('submitBtn');
+
+        form.addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            // UI Feedback
+            submitBtn.innerText = 'Sending...';
+            submitBtn.disabled = true;
+
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    form.style.display = 'none'; // Hide form on success
+                    successMessage.style.display = 'block';
+                } else {
+                    throw new Error();
+                }
+            } catch (error) {
+                alert('Oops! There was a problem. Please try again.');
+                submitBtn.innerText = 'Notify Me';
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
