@@ -3,268 +3,236 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Techvera Solution - Under Maintenance</title>
+    <title>Techvera Solutions | Technology Meets Trust</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary-color: #00c6ff;
-            --accent-color: #0072ff;
-            --bg-dark: #0a0a0b;
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --text-main: #ffffff;
-            --text-dim: #a0a0a0;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        }
-
-        body {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            overflow: hidden;
-            position: relative;
-        }
-
-        /* Animated background glow */
-        body::before {
-            content: "";
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, var(--accent-color), transparent 70%);
-            top: 10%;
-            left: 10%;
-            filter: blur(80px);
-            opacity: 0.15;
-            z-index: -1;
-            animation: move 20s infinite alternate;
-        }
-
-        @keyframes move {
-            from { transform: translate(0, 0); }
-            to { transform: translate(100px, 100px); }
-        }
-
-        .container {
-            max-width: 480px;
-            width: 92%;
-            padding: 40px;
-            border-radius: 24px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-
-        .logo-container {
-            margin-bottom: 20px;
-        }
-
-        .logo-img {
-            width: 284px;
-   	    height: 186px;
-            object-fit: contain;
-            /* Fallback style if image is missing */
-            background: var(--glass-bg);
-            border-radius: 16px;
-        }
-
-        .brand {
-            font-size: 14px;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            font-weight: 700;
-            margin-bottom: 8px;
-            background: linear-gradient(to right, #00c6ff, #0072ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        h1 {
-            font-size: 32px;
-            font-weight: 800;
-            margin-bottom: 16px;
-            letter-spacing: -0.5px;
-        }
-
-        p {
-            font-size: 15px;
-            color: var(--text-dim);
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
-
-        .form-group {
-            text-align: left;
-            margin-bottom: 15px;
-        }
-
-        input[type="email"], textarea {
-            width: 100%;
-            padding: 14px 16px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            color: #fff;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            outline: none;
-        }
-	input[type="text"], textarea {
-            width: 100%;
-            padding: 14px 16px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            color: #fff;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            outline: none;
-        }
-        input:focus, textarea:focus {
-            border-color: var(--primary-color);
-            background: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 0 0 4px rgba(0, 198, 255, 0.1);
-        }
-
-        textarea {
-            resize: none;
-            height: 90px;
-        }
-
-        button {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 12px;
-            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
-            color: #fff;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 10px;
-        }
-
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px -10px var(--primary-color);
-            filter: brightness(1.1);
-        }
-
-        button:active {
-            transform: translateY(0);
-        }
-
-        .success-message {
-            display: none;
-            padding: 20px;
-            background: rgba(0, 255, 174, 0.1);
-            border-radius: 12px;
-            color: #00ffae;
-            border: 1px solid rgba(0, 255, 174, 0.2);
-            margin-top: 20px;
-            animation: fadeIn 0.5s ease forwards;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .footer {
-            margin-top: 30px;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-dim);
-            opacity: 0.5;
-        }
+        body { font-family: 'Inter', sans-serif; }
+        .smooth-scroll { scroll-behavior: smooth; }
+        .hero-bg { background: radial-gradient(circle at top right, #f8fafc, #e2e8f0); }
+        .card-hover:hover { transform: translateY(-5px); transition: all 0.3s ease; }
     </style>
 </head>
-<body>
+<body class="smooth-scroll text-slate-900 bg-white">
 
-    <div class="container">
-        <div class="logo-container">
-            <!-- Replace 'your-logo.png' with your actual file -->
-            <img src="techvera.jpeg" class="logo-img" alt="techvera">
+    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <img src="techvera.jpeg" alt="Techvera Logo" class="h-10">
+                <span class="font-bold text-xl tracking-tighter text-blue-900 uppercase">Techvera</span>
+            </div>
+            <div class="hidden md:flex gap-8 text-xs font-semibold uppercase tracking-widest text-slate-500">
+                <a href="#about" class="hover:text-blue-600 transition">About</a>
+                <a href="#services" class="hover:text-blue-600 transition">Solutions</a>
+                <a href="#partners" class="hover:text-blue-600 transition">Partners</a>
+                <a href="#contact" class="bg-blue-900 text-white px-6 py-2 rounded-full hover:bg-blue-800 transition shadow-lg shadow-blue-100">Get Started</a>
+            </div>
         </div>
+    </nav>
 
-        <div class="brand">Techvera Solution</div>
-        <h1>Under Maintenance</h1>
-        <p>
-		We’re upgrading our systems to serve you better.
-		For business inquiries, please leave your email and we’ll contact you shortly.
-        </p>
-
-        <form id="contact-form" action="https://formspree.io/f/xwvwkaba" method="POST">
-	<div class="form-group">
-                <input type="text" name="name" placeholder="Enter Your name(Required)" required>
+    <section class="hero-bg pt-32 pb-24 px-6 text-center">
+        <div class="max-w-7xl mx-auto flex flex-col items-center">
+            <div class="inline-block px-4 py-1 mb-6 border border-blue-200 rounded-full bg-blue-50 text-blue-600 text-[10px] font-bold uppercase tracking-widest">
+                Reliability & Innovation
             </div>
-
-            <div class="form-group">
-                <input type="email" name="email" placeholder="Email Address(Required)" required>
+            <h1 class="text-5xl md:text-7xl font-extrabold text-slate-950 mb-6 leading-tight">
+                Where Technology <br> <span class="text-blue-600">Meets Trust.</span>
+            </h1>
+            <p class="text-lg text-slate-600 max-w-2xl mb-10 leading-relaxed">
+                To build a smarter, safer world through intelligent and sustainable innovation. 
+                We deliver high-performance solutions with precision, reliability, and customer focus.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4">
+                <a href="#services" class="px-8 py-4 bg-blue-950 text-white font-bold rounded-xl shadow-xl shadow-blue-200 hover:scale-105 transition">Explore Portfolio</a>
+                <a href="tel:+917065200225" class="px-8 py-4 border border-slate-200 font-bold rounded-xl hover:bg-slate-50 transition">Speak with an Expert</a>
             </div>
-            <div class="form-group">
-                <textarea name="message" placeholder="How can we help you? (Optional)"></textarea>
-            </div>
-
-            <button type="submit" id="submitBtn">Notify Me</button>
-        </form>
-
-        <div class="success-message" id="successMessage">
-            <strong>✨ You're on the list!</strong><br>
-            We'll reach out to you shortly.
         </div>
+    </section>
 
-        <div class="footer">&copy; 2026 Techvera Solution</div>
-    </div>
+    <section id="about" class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+            <div>
+                <h2 class="text-3xl font-bold mb-6 text-blue-900">Our Legacy</h2>
+                <p class="text-slate-600 mb-6 leading-relaxed">
+                    Techvera Solutions Private Limited derives its name from Latin roots that signify "trust in technology." 
+                    Built on a foundation of reliability, we stand committed to delivering dependable technological solutions that support modern manufacturing with smarter, integrated systems.
+                </p>
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="p-6 bg-slate-50 rounded-2xl">
+                        <span class="block text-3xl font-bold text-blue-900">Pan India</span>
+                        <span class="text-xs text-slate-500 uppercase font-semibold tracking-wider">Operational Footprint</span>
+                    </div>
+                    <div class="p-6 bg-slate-50 rounded-2xl">
+                        <span class="block text-3xl font-bold text-blue-900">ISO 9001</span>
+                        <span class="text-xs text-slate-500 uppercase font-semibold tracking-wider">Certified Quality</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-blue-900 rounded-3xl p-10 text-white relative overflow-hidden shadow-2xl">
+                <h3 class="text-2xl font-bold mb-8">Industrial Vision</h3>
+                <ul class="space-y-6 text-blue-100">
+                    <li class="flex items-start gap-3">
+                        <div class="w-1.5 h-1.5 bg-blue-400 rounded-full mt-2"></div>
+                        <span>Intelligent industrial automation systems integration.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <div class="w-1.5 h-1.5 bg-blue-400 rounded-full mt-2"></div>
+                        <span>High-performance material handling and Cranes.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <div class="w-1.5 h-1.5 bg-blue-400 rounded-full mt-2"></div>
+                        <span>Sustainable solar energy and consultancy projects.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <div class="w-1.5 h-1.5 bg-blue-400 rounded-full mt-2"></div>
+                        <span>Comprehensive industrial support and spares management.</span>
+                    </li>
+                </ul>
+                <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-white/5 rounded-full blur-3xl"></div>
+            </div>
+        </div>
+    </section>
 
-    <script>
-        const form = document.getElementById('contact-form');
-        const successMessage = document.getElementById('successMessage');
-        const submitBtn = document.getElementById('submitBtn');
+    <section id="services" class="py-24 bg-slate-50 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-slate-950 mb-4">Product Portfolio</h2>
+                <div class="h-1 w-20 bg-blue-600 mx-auto"></div>
+            </div>
 
-        form.addEventListener('submit', async function(event) {
-            event.preventDefault();
-            
-            // UI Feedback
-            submitBtn.innerText = 'Sending...';
-            submitBtn.disabled = true;
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-3xl border border-slate-100 card-hover shadow-sm">
+                    <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-blue-900">LV Switchgear</h3>
+                    <p class="text-slate-500 text-sm mb-6 leading-relaxed">Our assemblies conform to IEC 61439-1 & IS 8623. Type-tested by CPRI for temperature rise and short circuit strength.</p>
+                    <ul class="text-slate-400 text-xs space-y-2 font-medium">
+                        <li>• Electrical Panels & Solutions</li>
+                        <li>• Power Factor Panels</li>
+                        <li>• Low-Voltage Control Gear</li>
+                    </ul>
+                </div>
 
-            const formData = new FormData(form);
+                <div class="bg-white p-8 rounded-3xl border border-slate-100 card-hover shadow-sm">
+                    <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-blue-900">Automation</h3>
+                    <p class="text-slate-500 text-sm mb-6 leading-relaxed">Integration of smarter solutions for modern manufacturing, including PLC, VFD, and Motion Controllers.</p>
+                    <ul class="text-slate-400 text-xs space-y-2 font-medium">
+                        <li>• PLC & VFD Control Panels</li>
+                        <li>• Plant & Machine Automation</li>
+                        <li>• Servo Drives & Motors</li>
+                    </ul>
+                </div>
 
-            try {
-                const response = await fetch(form.action, {
-                    method: form.method,
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
+                <div class="bg-white p-8 rounded-3xl border border-slate-100 card-hover shadow-sm">
+                    <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-blue-900">Solar Energy</h3>
+                    <p class="text-slate-500 text-sm mb-6 leading-relaxed">End-to-end services for a hassle-free solar experience. Reduce electricity bills by up to 90%.</p>
+                    <ul class="text-slate-400 text-xs space-y-2 font-medium">
+                        <li>• Up to 40% Govt. Subsidy</li>
+                        <li>• Adani & Waaree Partnership</li>
+                        <li>• Minimal Maintenance Solutions</li>
+                    </ul>
+                </div>
 
-                if (response.ok) {
-                    form.style.display = 'none'; // Hide form on success
-                    successMessage.style.display = 'block';
-                } else {
-                    throw new Error();
-                }
-            } catch (error) {
-                alert('Oops! There was a problem. Please try again.');
-                submitBtn.innerText = 'Notify Me';
-                submitBtn.disabled = false;
-            }
-        });
-    </script>
+                <div class="bg-white p-8 rounded-3xl border border-slate-100 card-hover shadow-sm">
+                    <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-blue-900">EOT Cranes</h3>
+                    <p class="text-slate-500 text-sm mb-6 leading-relaxed">Experienced design and production team delivering double and single girder cranes up to 150T.</p>
+                    <ul class="text-slate-400 text-xs space-y-2 font-medium">
+                        <li>• Goliath & Jib Cranes</li>
+                        <li>• Electric Hoists & Winches</li>
+                        <li>• Digital Laser Calibration</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-8 rounded-3xl border border-slate-100 card-hover shadow-sm">
+                    <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-blue-900">Surveillance</h3>
+                    <p class="text-slate-500 text-sm mb-6 leading-relaxed">Empowering security with innovative tracking for factories, warehouses, and corporate spaces.</p>
+                    <ul class="text-slate-400 text-xs space-y-2 font-medium">
+                        <li>• Full HD Video Monitoring</li>
+                        <li>• Smart Tracking Systems</li>
+                        <li>• Outdoor Pan/Tilt Solutions</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-8 rounded-3xl border border-slate-100 card-hover shadow-sm">
+                    <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-blue-900">AMC & Services</h3>
+                    <p class="text-slate-500 text-sm mb-6 leading-relaxed">Comprehensive annual maintenance and repair services for all types of industrial installations.</p>
+                    <ul class="text-slate-400 text-xs space-y-2 font-medium">
+                        <li>• In-house Repair Centre</li>
+                        <li>• Spare Spares Management</li>
+                        <li>• Retrofitting Services</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="partners" class="py-24 px-6 text-center border-b border-slate-100">
+        <h2 class="text-sm font-bold uppercase tracking-[0.3em] text-slate-400 mb-12">Technology Partners</h2>
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-center items-center gap-x-16 gap-y-10 opacity-60 hover:opacity-100 transition duration-500">
+            <span class="text-3xl font-black italic tracking-tighter text-slate-800">ABB</span>
+            <span class="text-3xl font-black italic tracking-tighter text-slate-800">SCHNEIDER</span>
+            <span class="text-3xl font-black italic tracking-tighter text-slate-800">SIEMENS</span>
+            <span class="text-3xl font-black italic tracking-tighter text-slate-800">YASKAWA</span>
+            <span class="text-3xl font-black italic tracking-tighter text-slate-800">adani SOLAR</span>
+            <span class="text-3xl font-black italic tracking-tighter text-slate-800">HIKVISION</span>
+            <span class="text-3xl font-black italic tracking-tighter text-slate-800">CP PLUS</span>
+        </div>
+    </section>
+
+    <footer id="contact" class="bg-slate-950 text-white pt-24 pb-12 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-16 mb-20">
+            <div>
+                <div class="flex items-center gap-3 mb-8">
+                    <img src="techvera.jpeg" alt="Techvera Logo" class="h-10 brightness-0 invert">
+                    <span class="font-bold text-xl tracking-tighter uppercase">Techvera</span>
+                </div>
+                <p class="text-slate-400 leading-relaxed text-sm">
+                    A recognized reliable service and solution provider across industries, delivering precision, quality, and customer satisfaction at every stage.
+                </p>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold mb-8">Connect</h3>
+                <div class="space-y-4 text-sm font-medium">
+                    <p>Phone: +91-7065200225</p>
+                    <p>Phone: +91-8595485952</p>
+                    <p class="text-blue-400 underline underline-offset-4">www.techverasolutions.com</p>
+                </div>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold mb-8">Presence</h3>
+                <div class="grid grid-cols-2 gap-4 text-sm text-slate-400 font-medium">
+                    <span>• Haryana</span>
+                    <span>• Mumbai</span>
+                    <span>• Punjab</span>
+                    <span>• Bangalore</span>
+                    <span>• Delhi</span>
+                    <span>• U.P</span>
+                </div>
+                <p class="mt-6 text-xs text-slate-500 leading-relaxed">
+                    Head Office: A-178, Kalkaji, <br> New Delhi - 110019, India
+                </p>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto pt-12 border-t border-slate-900 text-center text-[10px] text-slate-600 font-bold uppercase tracking-[0.2em]">
+            &copy; 2026 Techvera Solutions Private Limited. All Rights Reserved.
+        </div>
+    </footer>
+
 </body>
 </html>
