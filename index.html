@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,88 +7,133 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        .smooth-scroll { scroll-behavior: smooth; }
-        .hero-bg { background: radial-gradient(circle at top right, #f8fafc, #e2e8f0); }
-        .card-hover:hover { transform: translateY(-5px); transition: all 0.3s ease; }
+        body { font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
+        
+        #mobile-menu {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+        }
+        #mobile-menu.open {
+            max-height: 100vh;
+            opacity: 1;
+            padding-bottom: 2.5rem;
+        }
+
+        .hamburger-line {
+            transition: all 0.3s ease-in-out;
+            transform-origin: center;
+        }
+        .open .line-1 { transform: translateY(7px) rotate(45deg); }
+        .open .line-2 { opacity: 0; }
+        .open .line-3 { transform: translateY(-7px) rotate(-45deg); }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .marquee-content {
+            display: flex;
+            width: max-content;
+            animation: scroll 30s linear infinite;
+        }
+        
+        .hero-gradient {
+            background: radial-gradient(circle at 50% -20%, #eff6ff 0%, #ffffff 100%);
+        }
+        
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
     </style>
 </head>
-<body class="smooth-scroll text-slate-900 bg-white">
+<body class="text-slate-900 bg-white">
 
-    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
+    <nav class="fixed w-full z-[100] glass-nav border-b border-slate-100">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <img src="techvera.jpeg" alt="Techvera Logo" class="h-10">
-                <span class="font-bold text-xl tracking-tighter text-blue-900 uppercase">Techvera</span>
+                <img src="techvera.jpeg" alt="Techvera Logo" class="h-9 w-auto rounded-lg shadow-sm" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                <div class="hidden h-9 w-9 bg-blue-900 rounded-xl items-center justify-center text-white font-bold">T</div>
+                <span class="font-extrabold text-lg tracking-tight text-blue-900 uppercase">Techvera</span>
             </div>
-            <div class="hidden md:flex gap-8 text-xs font-semibold uppercase tracking-widest text-slate-500">
+            
+            <div class="hidden md:flex gap-8 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-500 items-center">
                 <a href="#about" class="hover:text-blue-600 transition">About</a>
                 <a href="#services" class="hover:text-blue-600 transition">Solutions</a>
                 <a href="#partners" class="hover:text-blue-600 transition">Partners</a>
-                <a href="#contact" class="bg-blue-900 text-white px-6 py-2 rounded-full hover:bg-blue-800 transition shadow-lg shadow-blue-100">Get Started</a>
+                <a href="#contact" class="bg-blue-900 text-white px-7 py-2.5 rounded-full hover:bg-blue-800 transition shadow-md">Get Started</a>
+            </div>
+
+            <button id="menu-btn" class="md:hidden p-2 text-blue-900 focus:outline-none" aria-label="Toggle Menu">
+                <div class="w-6 h-5 flex flex-col justify-between items-center">
+                    <span class="hamburger-line line-1 w-full h-0.5 bg-current rounded-full"></span>
+                    <span class="hamburger-line line-2 w-full h-0.5 bg-current rounded-full"></span>
+                    <span class="hamburger-line line-3 w-full h-0.5 bg-current rounded-full"></span>
+                </div>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="md:hidden bg-white px-6">
+            <div class="flex flex-col gap-6 pt-6 text-center">
+                <a href="#about" class="text-sm font-bold uppercase tracking-widest text-slate-600">About</a>
+                <a href="#services" class="text-sm font-bold uppercase tracking-widest text-slate-600">Solutions</a>
+                <a href="#partners" class="text-sm font-bold uppercase tracking-widest text-slate-600">Partners</a>
+                <a href="#contact" class="bg-blue-900 text-white px-6 py-4 rounded-2xl font-bold shadow-xl active:scale-95 transition">Get Started</a>
             </div>
         </div>
     </nav>
 
-    <section class="hero-bg pt-32 pb-24 px-6 text-center">
-        <div class="max-w-7xl mx-auto flex flex-col items-center">
-            <div class="inline-block px-4 py-1 mb-6 border border-blue-200 rounded-full bg-blue-50 text-blue-600 text-[10px] font-bold uppercase tracking-widest">
+    <section class="hero-gradient pt-36 pb-20 px-6">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 mb-8 border border-blue-100 rounded-full bg-blue-50/50 text-blue-600 text-[10px] font-bold uppercase tracking-widest">
+                <span class="relative flex h-2 w-2"><span class="animate-ping absolute h-full w-full rounded-full bg-blue-400 opacity-75"></span><span class="relative h-2 w-2 bg-blue-600 rounded-full"></span></span>
                 Reliability & Innovation
             </div>
-            <h1 class="text-5xl md:text-7xl font-extrabold text-slate-950 mb-6 leading-tight">
-                Where Technology <br> <span class="text-blue-600">Meets Trust.</span>
+            <h1 class="text-4xl md:text-7xl font-extrabold text-slate-900 mb-6 leading-[1.15] tracking-tight">
+                Where Technology <br class="hidden md:block"> <span class="text-blue-600">Meets Trust.</span>
             </h1>
-            <p class="text-lg text-slate-600 max-w-2xl mb-10 leading-relaxed">
-                To build a smarter, safer world through intelligent and sustainable innovation. 
-                We deliver high-performance solutions with precision, reliability, and customer focus.
+            <p class="text-base md:text-lg text-slate-600 max-w-2xl mx-auto mb-12 leading-relaxed px-2">
+                To build a smarter, safer world through intelligent and sustainable innovation. We deliver high-performance solutions with precision, reliability, and customer focus.
             </p>
-            <div class="flex flex-col sm:flex-row gap-4">
-                <a href="#services" class="px-8 py-4 bg-blue-950 text-white font-bold rounded-xl shadow-xl shadow-blue-200 hover:scale-105 transition">Explore Portfolio</a>
-                <a href="tel:+917065200225" class="px-8 py-4 border border-slate-200 font-bold rounded-xl hover:bg-slate-50 transition">Speak with an Expert</a>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="#services" class="w-full sm:w-auto px-10 py-4 bg-blue-900 text-white font-bold rounded-2xl shadow-2xl active:scale-95 transition">Explore Portfolio</a>
+                <a href="tel:+917065200225" class="w-full sm:w-auto px-10 py-4 border border-slate-200 bg-white font-bold rounded-2xl active:scale-95 transition">Speak with an Expert</a>
             </div>
         </div>
     </section>
 
-    <section id="about" class="py-24 px-6 max-w-7xl mx-auto">
-        <div class="grid md:grid-cols-2 gap-16 items-center">
-            <div>
-                <h2 class="text-3xl font-bold mb-6 text-blue-900">Our Legacy</h2>
-                <p class="text-slate-600 mb-6 leading-relaxed">
-                    Techvera Solutions Private Limited derives its name from Latin roots that signify "trust in technology." 
-                    Built on a foundation of reliability, we stand committed to delivering dependable technological solutions that support modern manufacturing with smarter, integrated systems.
-                </p>
-                <div class="grid grid-cols-2 gap-6">
-                    <div class="p-6 bg-slate-50 rounded-2xl">
-                        <span class="block text-3xl font-bold text-blue-900">Pan India</span>
-                        <span class="text-xs text-slate-500 uppercase font-semibold tracking-wider">Operational Footprint</span>
+    <section id="about" class="py-20 px-6 max-w-7xl mx-auto">
+        <div class="grid lg:grid-cols-2 gap-14 items-center">
+            <div class="space-y-8 order-2 lg:order-1">
+                <div class="text-center lg:text-left">
+                    <h2 class="text-sm font-bold tracking-[0.25em] text-blue-600 uppercase mb-4">Our Legacy</h2>
+                    <p class="text-slate-600 leading-relaxed text-base md:text-lg">
+                        Techvera Solutions Private Limited derives its name from Latin roots signifying **"trust in technology."** Built on a foundation of reliability, we support modern manufacturing with smarter, integrated systems.
+                    </p>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="p-6 bg-slate-50 rounded-3xl border border-slate-100 text-center">
+                        <span class="block text-3xl font-extrabold text-blue-900 mb-1">Pan India</span>
+                        <span class="text-[10px] text-slate-400 uppercase font-bold tracking-widest">Operational Footprint</span>
                     </div>
-                    <div class="p-6 bg-slate-50 rounded-2xl">
-                        <span class="block text-3xl font-bold text-blue-900">ISO 9001</span>
-                        <span class="text-xs text-slate-500 uppercase font-semibold tracking-wider">Certified Quality</span>
+                    <div class="p-6 bg-slate-50 rounded-3xl border border-slate-100 text-center">
+                        <span class="block text-3xl font-extrabold text-blue-900 mb-1">ISO 9001</span>
+                        <span class="text-[10px] text-slate-400 uppercase font-bold tracking-widest">Certified Quality</span>
                     </div>
                 </div>
             </div>
-            <div class="bg-blue-900 rounded-3xl p-10 text-white relative overflow-hidden shadow-2xl">
+            
+            <div class="order-1 lg:order-2 bg-blue-900 rounded-[2.5rem] p-10 text-white relative shadow-2xl">
                 <h3 class="text-2xl font-bold mb-8">Industrial Vision</h3>
-                <ul class="space-y-6 text-blue-100">
-                    <li class="flex items-start gap-3">
-                        <div class="w-1.5 h-1.5 bg-blue-400 rounded-full mt-2"></div>
-                        <span>Intelligent industrial automation systems integration.</span>
-                    </li>
-                    <li class="flex items-start gap-3">
-                        <div class="w-1.5 h-1.5 bg-blue-400 rounded-full mt-2"></div>
-                        <span>High-performance material handling and Cranes.</span>
-                    </li>
-                    <li class="flex items-start gap-3">
-                        <div class="w-1.5 h-1.5 bg-blue-400 rounded-full mt-2"></div>
-                        <span>Sustainable solar energy and consultancy projects.</span>
-                    </li>
-                    <li class="flex items-start gap-3">
-                        <div class="w-1.5 h-1.5 bg-blue-400 rounded-full mt-2"></div>
-                        <span>Comprehensive industrial support and spares management.</span>
-                    </li>
+                <ul class="space-y-6">
+                    <li class="flex gap-4 items-start"><div class="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div><p class="text-sm md:text-base">Intelligent industrial automation systems integration.</p></li>
+                    <li class="flex gap-4 items-start"><div class="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div><p class="text-sm md:text-base">High-performance material handling and Cranes.</p></li>
+                    <li class="flex gap-4 items-start"><div class="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div><p class="text-sm md:text-base">Sustainable solar energy and consultancy projects.</p></li>
+                    <li class="flex gap-4 items-start"><div class="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div><p class="text-sm md:text-base">Comprehensive industrial support and spares management.</p></li>
                 </ul>
-                <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-white/5 rounded-full blur-3xl"></div>
             </div>
         </div>
     </section>
@@ -96,143 +141,130 @@
     <section id="services" class="py-24 bg-slate-50 px-6">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-slate-950 mb-4">Product Portfolio</h2>
-                <div class="h-1 w-20 bg-blue-600 mx-auto"></div>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">Product Portfolio</h2>
+                <div class="h-1.5 w-16 bg-blue-600 mx-auto rounded-full"></div>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-white p-8 rounded-3xl border border-slate-100 card-hover shadow-sm">
-                    <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-6">
-                        <svg class="w-6 h-6 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4 text-blue-900">LV Switchgear</h3>
-                    <p class="text-slate-500 text-sm mb-6 leading-relaxed">Our assemblies conform to IEC 61439-1 & IS 8623. Type-tested by CPRI for temperature rise and short circuit strength.</p>
-                    <ul class="text-slate-400 text-xs space-y-2 font-medium">
-                        <li>• Electrical Panels & Solutions</li>
-                        <li>• Power Factor Panels</li>
-                        <li>• Low-Voltage Control Gear</li>
-                    </ul>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-[2rem] border border-slate-200/60 shadow-sm hover:shadow-xl transition-all group">
+                    <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-900 group-hover:text-white transition-all text-blue-900"><svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg></div>
+                    <h3 class="text-xl font-bold mb-3 text-blue-900">LV Switchgear</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed mb-6">Assemblies conforming to IEC 61439-1 & IS 8623. Type-tested by CPRI for short circuit strength.</p>
+                    <ul class="text-slate-400 text-xs space-y-2 font-semibold"><li>• Electrical Panels & Solutions</li><li>• Power Factor Panels</li><li>• Control Gear</li></ul>
                 </div>
 
-                <div class="bg-white p-8 rounded-3xl border border-slate-100 card-hover shadow-sm">
-                    <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-6">
-                        <svg class="w-6 h-6 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4 text-blue-900">Automation</h3>
-                    <p class="text-slate-500 text-sm mb-6 leading-relaxed">Integration of smarter solutions for modern manufacturing, including PLC, VFD, and Motion Controllers.</p>
-                    <ul class="text-slate-400 text-xs space-y-2 font-medium">
-                        <li>• PLC & VFD Control Panels</li>
-                        <li>• Plant & Machine Automation</li>
-                        <li>• Servo Drives & Motors</li>
-                    </ul>
+                <div class="bg-white p-8 rounded-[2rem] border border-slate-200/60 shadow-sm hover:shadow-xl transition-all group">
+                    <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-900 group-hover:text-white transition-all text-blue-900"><svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg></div>
+                    <h3 class="text-xl font-bold mb-3 text-blue-900">Automation</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed mb-6">Smarter manufacturing integration including PLC, VFD, and Motion Controllers.</p>
+                    <ul class="text-slate-400 text-xs space-y-2 font-semibold"><li>• PLC & VFD Control Panels</li><li>• Machine Automation</li><li>• Servo Motors</li></ul>
                 </div>
 
-                <div class="bg-white p-8 rounded-3xl border border-slate-100 card-hover shadow-sm">
-                    <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-6">
-                        <svg class="w-6 h-6 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707"></path></svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4 text-blue-900">Solar Energy</h3>
-                    <p class="text-slate-500 text-sm mb-6 leading-relaxed">End-to-end services for a hassle-free solar experience. Reduce electricity bills by up to 90%.</p>
-                    <ul class="text-slate-400 text-xs space-y-2 font-medium">
-                        <li>• Up to 40% Govt. Subsidy</li>
-                        <li>• Adani & Waaree Partnership</li>
-                        <li>• Minimal Maintenance Solutions</li>
-                    </ul>
+                <div class="bg-white p-8 rounded-[2rem] border border-slate-200/60 shadow-sm hover:shadow-xl transition-all group">
+                    <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-900 group-hover:text-white transition-all text-blue-900"><svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707"></path></svg></div>
+                    <h3 class="text-xl font-bold mb-3 text-blue-900">Solar Energy</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed mb-6">Reduce electricity bills by up to 90%. Adani & Waaree partnerships for hassle-free service.</p>
+                    <ul class="text-slate-400 text-xs space-y-2 font-semibold"><li>• Up to 40% Govt. Subsidy</li><li>• Minimal Maintenance</li></ul>
                 </div>
 
-                <div class="bg-white p-8 rounded-3xl border border-slate-100 card-hover shadow-sm">
-                    <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-6">
-                        <svg class="w-6 h-6 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4 text-blue-900">EOT Cranes</h3>
-                    <p class="text-slate-500 text-sm mb-6 leading-relaxed">Experienced design and production team delivering double and single girder cranes up to 150T.</p>
-                    <ul class="text-slate-400 text-xs space-y-2 font-medium">
-                        <li>• Goliath & Jib Cranes</li>
-                        <li>• Electric Hoists & Winches</li>
-                        <li>• Digital Laser Calibration</li>
-                    </ul>
+                <div class="bg-white p-8 rounded-[2rem] border border-slate-200/60 shadow-sm hover:shadow-xl transition-all group">
+                    <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-900 group-hover:text-white transition-all text-blue-900"><svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg></div>
+                    <h3 class="text-xl font-bold mb-3 text-blue-900">EOT Cranes</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed mb-6">Double and single girder cranes up to 150T. Design, production, and digital calibration.</p>
+                    <ul class="text-slate-400 text-xs space-y-2 font-semibold"><li>• Goliath & Jib Cranes</li><li>• Electric Hoists</li><li>• Calibration Services</li></ul>
                 </div>
 
-                <div class="bg-white p-8 rounded-3xl border border-slate-100 card-hover shadow-sm">
-                    <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-6">
-                        <svg class="w-6 h-6 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4 text-blue-900">Surveillance</h3>
-                    <p class="text-slate-500 text-sm mb-6 leading-relaxed">Empowering security with innovative tracking for factories, warehouses, and corporate spaces.</p>
-                    <ul class="text-slate-400 text-xs space-y-2 font-medium">
-                        <li>• Full HD Video Monitoring</li>
-                        <li>• Smart Tracking Systems</li>
-                        <li>• Outdoor Pan/Tilt Solutions</li>
-                    </ul>
+                <div class="bg-white p-8 rounded-[2rem] border border-slate-200/60 shadow-sm hover:shadow-xl transition-all group">
+                    <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-900 group-hover:text-white transition-all text-blue-900"><svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg></div>
+                    <h3 class="text-xl font-bold mb-3 text-blue-900">Surveillance</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed mb-6">Innovative security tracking for factories, warehouses, and corporate spaces.</p>
+                    <ul class="text-slate-400 text-xs space-y-2 font-semibold"><li>• Full HD Video Monitoring</li><li>• Smart Tracking Systems</li></ul>
                 </div>
 
-                <div class="bg-white p-8 rounded-3xl border border-slate-100 card-hover shadow-sm">
-                    <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-6">
-                        <svg class="w-6 h-6 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4 text-blue-900">AMC & Services</h3>
-                    <p class="text-slate-500 text-sm mb-6 leading-relaxed">Comprehensive annual maintenance and repair services for all types of industrial installations.</p>
-                    <ul class="text-slate-400 text-xs space-y-2 font-medium">
-                        <li>• In-house Repair Centre</li>
-                        <li>• Spare Spares Management</li>
-                        <li>• Retrofitting Services</li>
-                    </ul>
+                <div class="bg-white p-8 rounded-[2rem] border border-slate-200/60 shadow-sm hover:shadow-xl transition-all group">
+                    <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-900 group-hover:text-white transition-all text-blue-900"><svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path></svg></div>
+                    <h3 class="text-xl font-bold mb-3 text-blue-900">AMC & Services</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed mb-6">Comprehensive annual maintenance, repair, and retrofitting services for all industrial needs.</p>
+                    <ul class="text-slate-400 text-xs space-y-2 font-semibold"><li>• In-house Repair Centre</li><li>• Spares Management</li></ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="partners" class="py-24 px-6 text-center border-b border-slate-100">
-        <h2 class="text-sm font-bold uppercase tracking-[0.3em] text-slate-400 mb-12">Technology Partners</h2>
-        <div class="max-w-7xl mx-auto flex flex-wrap justify-center items-center gap-x-16 gap-y-10 opacity-60 hover:opacity-100 transition duration-500">
-            <span class="text-3xl font-black italic tracking-tighter text-slate-800">ABB</span>
-            <span class="text-3xl font-black italic tracking-tighter text-slate-800">SCHNEIDER</span>
-            <span class="text-3xl font-black italic tracking-tighter text-slate-800">SIEMENS</span>
-            <span class="text-3xl font-black italic tracking-tighter text-slate-800">YASKAWA</span>
-            <span class="text-3xl font-black italic tracking-tighter text-slate-800">adani SOLAR</span>
-            <span class="text-3xl font-black italic tracking-tighter text-slate-800">HIKVISION</span>
-            <span class="text-3xl font-black italic tracking-tighter text-slate-800">CP PLUS</span>
+    <section id="partners" class="py-16 bg-white overflow-hidden">
+        <h2 class="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 mb-10 text-center">Global Technology Partners</h2>
+        <div class="relative flex overflow-x-hidden">
+            <div class="marquee-content gap-16 items-center">
+                <span class="text-2xl font-black italic tracking-tighter text-slate-300">ABB</span>
+                <span class="text-2xl font-black italic tracking-tighter text-slate-300">SCHNEIDER</span>
+                <span class="text-2xl font-black italic tracking-tighter text-slate-300">SIEMENS</span>
+                <span class="text-2xl font-black italic tracking-tighter text-slate-300">YASKAWA</span>
+                <span class="text-2xl font-black italic tracking-tighter text-blue-500/40 uppercase">adani Solar</span>
+                <span class="text-2xl font-black italic tracking-tighter text-slate-300">WAAREE</span>
+                <span class="text-2xl font-black italic tracking-tighter text-slate-300">HIKVISION</span>
+                <span class="text-2xl font-black italic tracking-tighter text-slate-300">CP PLUS</span>
+                <span class="text-2xl font-black italic tracking-tighter text-slate-300">ABB</span>
+                <span class="text-2xl font-black italic tracking-tighter text-slate-300">SCHNEIDER</span>
+                <span class="text-2xl font-black italic tracking-tighter text-slate-300">SIEMENS</span>
+                <span class="text-2xl font-black italic tracking-tighter text-slate-300">YASKAWA</span>
+                <span class="text-2xl font-black italic tracking-tighter text-blue-500/40 uppercase">adani Solar</span>
+                <span class="text-2xl font-black italic tracking-tighter text-slate-300">WAAREE</span>
+                <span class="text-2xl font-black italic tracking-tighter text-slate-300">HIKVISION</span>
+                <span class="text-2xl font-black italic tracking-tighter text-slate-300">CP PLUS</span>
+            </div>
         </div>
     </section>
 
-    <footer id="contact" class="bg-slate-950 text-white pt-24 pb-12 px-6">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-16 mb-20">
+    <footer id="contact" class="bg-slate-950 text-white pt-20 pb-10 px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-16 mb-16">
             <div>
                 <div class="flex items-center gap-3 mb-8">
-                    <img src="techvera.jpeg" alt="Techvera Logo" class="h-10 brightness-0 invert">
-                    <span class="font-bold text-xl tracking-tighter uppercase">Techvera</span>
+                    <img src="techvera.jpeg" alt="Logo" class="h-8 brightness-0 invert" onerror="this.style.display='none'">
+                    <span class="font-bold text-xl tracking-tight uppercase">Techvera</span>
                 </div>
-                <p class="text-slate-400 leading-relaxed text-sm">
-                    A recognized reliable service and solution provider across industries, delivering precision, quality, and customer satisfaction at every stage.
-                </p>
+                <p class="text-slate-400 text-sm leading-relaxed max-w-xs">A recognized reliable service and solution provider across industries, delivering precision and quality at every stage.</p>
             </div>
+            
             <div>
-                <h3 class="text-lg font-bold mb-8">Connect</h3>
+                <h3 class="text-sm font-bold uppercase tracking-widest mb-8 text-blue-400">Connect</h3>
                 <div class="space-y-4 text-sm font-medium">
-                    <p>Phone: +91-7065200225</p>
-                    <p>Phone: +91-8595485952</p>
-                    <p class="text-blue-400 underline underline-offset-4">www.techverasolutions.com</p>
+                    <a href="tel:+917065200225" class="block text-slate-300 hover:text-white transition">Ph: +91 7065200225</a>
+                    <a href="tel:+918595485952" class="block text-slate-300 hover:text-white transition">Ph: +91 8595485952</a>
+                    <a href="https://www.techverasolutions.com" target="_blank" class="block text-blue-400 font-bold mt-4 hover:underline underline-offset-4">www.techverasolutions.com</a>
                 </div>
             </div>
+
             <div>
-                <h3 class="text-lg font-bold mb-8">Presence</h3>
-                <div class="grid grid-cols-2 gap-4 text-sm text-slate-400 font-medium">
-                    <span>• Haryana</span>
-                    <span>• Mumbai</span>
-                    <span>• Punjab</span>
-                    <span>• Bangalore</span>
-                    <span>• Delhi</span>
-                    <span>• U.P</span>
+                <h3 class="text-sm font-bold uppercase tracking-widest mb-8 text-blue-400">Our Presence</h3>
+                <div class="grid grid-cols-2 gap-y-3 text-xs text-slate-400 font-semibold mb-6">
+                    <span>• Haryana</span><span>• Mumbai</span><span>• Punjab</span><span>• Bangalore</span><span>• Delhi</span><span>• U.P</span>
                 </div>
-                <p class="mt-6 text-xs text-slate-500 leading-relaxed">
+                <p class="text-[11px] text-slate-500 leading-relaxed border-t border-slate-900 pt-4 uppercase tracking-wider">
                     Head Office: A-178, Kalkaji, <br> New Delhi - 110019, India
                 </p>
             </div>
         </div>
-        <div class="max-w-7xl mx-auto pt-12 border-t border-slate-900 text-center text-[10px] text-slate-600 font-bold uppercase tracking-[0.2em]">
-            &copy; 2026 Techvera Solutions Private Limited. All Rights Reserved.
+        
+        <div class="max-w-7xl mx-auto pt-10 border-t border-slate-900 text-center">
+            <p class="text-[10px] text-slate-600 font-bold uppercase tracking-[0.3em]">&copy; 2026 Techvera Solutions Private Limited. All Rights Reserved.</p>
         </div>
     </footer>
 
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+            menuBtn.classList.toggle('open');
+        });
+
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                menuBtn.classList.remove('open');
+            });
+        });
+    </script>
 </body>
 </html>
