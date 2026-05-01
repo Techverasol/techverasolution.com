@@ -889,6 +889,16 @@ nav {
   margin-top: 4px;
 }
 .btn-submit:hover { background: var(--gold-light); }
+.success-message {
+            display: none;
+            padding: 20px;
+            background: rgba(0, 255, 174, 0.1);
+            border-radius: 12px;
+            color: #00ffae;
+            border: 1px solid rgba(0, 255, 174, 0.2);
+            margin-top: 20px;
+            animation: fadeIn 0.5s ease forwards;
+        }
 
 /* ─── FOOTER ─── */
 footer {
@@ -1715,45 +1725,177 @@ footer {
           </div>
         </div>
       </div>
-      <div class="contact-form">
-        <h3>Send an Enquiry</h3>
-        <p>Our team will respond within 24 hours.</p>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Full Name</label>
-            <input type="text" placeholder="Your name">
-          </div>
-          <div class="form-group">
-            <label>Phone Number</label>
-            <input type="tel" placeholder="+91 XXXXX XXXXX">
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Email Address</label>
-          <input type="email" placeholder="your@email.com">
-        </div>
-        <div class="form-group">
-          <label>Service Interested In</label>
-          <select>
-            <option value="">Select a service</option>
-            <option>Electrical Panels & Solutions</option>
-            <option>Industrial Drives (VFDs)</option>
-            <option>Solar Energy Solutions</option>
-            <option>EOT / Garder Cranes</option>
-            <option>Surveillance Systems</option>
-            <option>Spares, Repair & AMC</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Message</label>
-          <textarea placeholder="Describe your requirement..."></textarea>
-        </div>
-        <button class="btn-submit">Send Enquiry →</button>
+<form id="contact-form" action="https://formspree.io/f/xwvwkaba" method="POST">
+  
+  <div class="contact-form">
+    <h3>Send an Enquiry</h3>
+    <p>Our team will respond within 24 hours.</p>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input 
+          type="text" 
+          name="name" 
+          placeholder="Your name" 
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input 
+          type="tel" 
+          name="phone" 
+          placeholder="+91 XXXXX XXXXX" 
+          required
+        >
       </div>
     </div>
-  </div>
-</section>
 
+    <div class="form-group">
+      <label>Email Address</label>
+      <input 
+        type="email" 
+        name="email" 
+        placeholder="your@email.com" 
+        required
+      >
+    </div>
+
+    <div class="form-group">
+      <label>Service Interested In</label>
+      <select name="service" required>
+        <option value="">Select a service</option>
+        <option value="Electrical Panels & Solutions">
+          Electrical Panels & Solutions
+        </option>
+        <option value="Industrial Drives (VFDs)">
+          Industrial Drives (VFDs)
+        </option>
+        <option value="Solar Energy Solutions">
+          Solar Energy Solutions
+        </option>
+        <option value="EOT / Garder Cranes">
+          EOT / Garder Cranes
+        </option>
+        <option value="Surveillance Systems">
+          Surveillance Systems
+        </option>
+        <option value="Spares, Repair & AMC">
+          Spares, Repair & AMC
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Message</label>
+      <textarea 
+        name="message" 
+        placeholder="Describe your requirement..." 
+        rows="5" 
+        required
+      ></textarea>
+    </div>
+
+    <button type="submit" class="btn-submit" id="submitBtn">
+      Send Enquiry →
+    </button>
+
+    <div 
+      class="success-message" 
+      id="successMessage" 
+      style="display: none; margin-top: 15px;"
+    >
+      <strong>✨ You're on the list!</strong><br>
+      We'll reach out to you shortly.
+    </div>
+
+  </div>
+</form>
+
+<script>
+  const form = document.getElementById("contact-form");
+  const successMessage = document.getElementById("successMessage");
+  const submitBtn = document.getElementById("submitBtn");
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    submitBtn.disabled = true;
+    submitBtn.innerText = "Sending...";
+
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch(form.action, {
+        method: form.method,
+        body: formData,
+        headers: {
+          Accept: "application/json"
+        }
+      });
+
+      if (response.ok) {
+        successMessage.style.display = "block";
+        form.reset();
+
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Send Enquiry →";
+      } else {
+        alert("Something went wrong. Please try again.");
+
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Send Enquiry →";
+      }
+
+    } catch (error) {
+      alert("Network error. Please try again.");
+
+      submitBtn.disabled = false;
+      submitBtn.innerText = "Send Enquiry →";
+    }
+  });
+</script>
+  </div>
+
+</section>
+<script>
+        const form = document.getElementById('contact-form');
+        const successMessage = document.getElementById('successMessage');
+        const submitBtn = document.getElementById('submitBtn');
+
+        form.addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            // UI Feedback
+            submitBtn.innerText = 'Sending...';
+            submitBtn.disabled = true;
+
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    form.style.display = 'none'; // Hide form on success
+                    successMessage.style.display = 'block';
+                } else {
+                    throw new Error();
+                }
+            } catch (error) {
+                alert('Oops! There was a problem. Please try again.');
+                submitBtn.innerText = 'Notify Me';
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
