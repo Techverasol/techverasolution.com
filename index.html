@@ -9,8 +9,8 @@
 :root {
   --navy: #0d1f3c;
   --navy-mid: #163060;
-  --gold: #f5b800;
-  --gold-dark: #d49d00;
+  --gold: #f3c94b;
+  --gold-dark: #efbe39;
   --gold-light: #ffd84d;
   --white: #ffffff;
   --off-white: #f8f7f2;
@@ -72,6 +72,7 @@ nav {
   gap: 12px;
   text-decoration: none;
 }
+/* Legacy logo-icon/logo-text kept in case used elsewhere */
 .logo-icon {
   width: 48px;
   height: 48px;
@@ -985,12 +986,200 @@ footer {
   .hero-accent { display: none; }
   nav .nav-links { display: none; }
 }
+/* ─── LOGO IMAGE ─── */
+.logo-img {
+  height: 54px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+.logo-img-footer {
+  height: 46px;
+  /* filter: brightness(0) invert(1); makes dark logo white for footer – remove if logo is already light */
+}
+
+/* ─── SLIDESHOW ─── */
+.slideshow {
+  position: relative;
+  width: 100%;
+  height: 520px;
+  overflow: hidden;
+  background: var(--navy);
+}
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.9s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.slide.active { opacity: 1; z-index: 1; }
+.slide-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 6s ease;
+}
+.slide.active .slide-bg { transform: scale(1.05); }
+/* SLIDE IMAGES: Each slide-bg has a background-image set inline below */
+.slide-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(13,31,60,0.82) 40%, rgba(13,31,60,0.35) 100%);
+  z-index: 1;
+}
+.slide-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1240px;
+  width: 100%;
+  padding: 0 24px;
+  color: var(--white);
+}
+.slide-tag {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--navy);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 2px;
+  margin-bottom: 16px;
+}
+.slide-content h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin-bottom: 14px;
+  color: var(--white);
+}
+.slide-content h2 span { color: var(--gold); }
+.slide-content p {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.75);
+  max-width: 520px;
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+.slide-btn {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--navy);
+  padding: 12px 28px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: background 0.2s;
+}
+.slide-btn:hover { background: var(--white); }
+/* Dots */
+.slide-dots {
+  position: absolute;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+.slide-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.35);
+  cursor: pointer;
+  border: none;
+  transition: background 0.3s, transform 0.3s;
+  padding: 0;
+}
+.slide-dot.active { background: var(--gold); transform: scale(1.3); }
+/* Arrows */
+.slide-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: var(--white);
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.slide-arrow:hover { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+.slide-arrow.prev { left: 20px; }
+.slide-arrow.next { right: 20px; }
+
+/* ─── WHATSAPP CHAT BUTTON ─── */
+.whatsapp-float {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 9999;
+}
+.whatsapp-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #25D366;
+  color: #fff;
+  padding: 13px 20px 13px 16px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.88rem;
+  box-shadow: 0 6px 24px rgba(37,211,102,0.4);
+  transition: all 0.3s;
+  white-space: nowrap;
+}
+.whatsapp-btn:hover {
+  background: #1ebe5b;
+  box-shadow: 0 8px 30px rgba(37,211,102,0.55);
+  transform: translateY(-2px);
+}
+.whatsapp-btn svg { width: 22px; height: 22px; flex-shrink: 0; }
+.whatsapp-pulse {
+  position: absolute;
+  top: 0; right: 0;
+  width: 12px; height: 12px;
+  background: #ff3b30;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+.whatsapp-pulse::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: rgba(255,59,48,0.4);
+  animation: pulse 1.5s infinite;
+}
+@keyframes pulse {
+  0%,100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.5); opacity: 0; }
+}
+
+@media (max-width: 900px) {
+  .slideshow { height: 380px; }
+  .slide-content h2 { font-size: 2rem; }
+  .slide-arrow { display: none; }
+  .whatsapp-btn span { display: none; }
+  .whatsapp-btn { padding: 13px; border-radius: 50%; }
+}
 @media (max-width: 600px) {
-  .services-grid { grid-template-columns: 1fr; }
-  .hero h1 { font-size: 2.2rem; }
-  .form-row { grid-template-columns: 1fr; }
-  .about-highlights { grid-template-columns: 1fr; }
-  .vm-boxes { grid-template-columns: 1fr; }
+  .slideshow { height: 300px; }
 }
 </style>
 </head>
@@ -1012,17 +1201,8 @@ footer {
 <nav>
   <div class="nav-inner">
     <a href="#" class="logo">
-      <div class="logo-icon">
-        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="20" cy="20" r="18" fill="#0d1f3c"/>
-          <path d="M10 20 L20 10 L30 20 L20 30 Z" fill="#f5b800" opacity="0.9"/>
-          <circle cx="20" cy="20" r="5" fill="#0d1f3c"/>
-        </svg>
-      </div>
-      <div class="logo-text">
-        <div class="name">TECHVERA</div>
-        <div class="tagline">Solutions Pvt. Ltd.</div>
-      </div>
+      <!-- LOGO IMAGE: Replace src with your actual logo file path e.g. "assets/logo.png" -->
+      <img src="techvera.jpeg" alt="Techvera Solutions Logo" class="logo-img">
     </a>
     <ul class="nav-links">
       <li><a href="#about">About Us</a></li>
@@ -1033,6 +1213,79 @@ footer {
     </ul>
   </div>
 </nav>
+
+<!-- ═══════════════════════════════════════════
+     SLIDESHOW
+     HOW TO ADD YOUR OWN IMAGES:
+     In each .slide-bg below, change the style="background-image:url('assets/slideX.jpg')"
+     to point to your actual image file. Recommended size: 1600×700px.
+═══════════════════════════════════════════ -->
+<section class="slideshow" id="slideshow">
+
+  <!-- SLIDE 1 -->
+  <div class="slide active" id="slide-1">
+    <!-- SLIDE 1 IMAGE: Replace 'assets/slide1.jpg' with your image path -->
+    <div class="slide-bg" style="background-image:url('assets/factory_2.png'); background-color:#0d1f3c;"></div>
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      <div class="slide-tag">ISO 9001:2015 Certified</div>
+      <h2>Powering India's<br><span>Industrial Future</span></h2>
+      <p>End-to-end electrical panels, automation & control solutions — type-tested and trusted by industries across Pan India.</p>
+      <a href="#services" class="slide-btn">Explore Solutions →</a>
+    </div>
+  </div>
+
+  <!-- SLIDE 2 -->
+  <div class="slide" id="slide-2">
+    <!-- SLIDE 2 IMAGE: Replace 'assets/slide2.jpg' with your image path -->
+    <div class="slide-bg" style="background-image:url('assets/Solar_rP_2.png'); background-color:#163060;"></div>
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      <div class="slide-tag">Solar Energy Solutions</div>
+      <h2>Go Solar,<br><span>Save Up to 90%</span></h2>
+      <p>Authorised partner of Adani Solar & Waaree. Government-subsidised installation with up to 40% subsidy available.</p>
+      <a href="#contact" class="slide-btn">Get a Free Quote →</a>
+    </div>
+  </div>
+
+  <!-- SLIDE 3 -->
+  <div class="slide" id="slide-3">
+    <!-- SLIDE 3 IMAGE: Replace 'assets/slide3.jpg' with your image path -->
+    <div class="slide-bg" style="background-image:url('assets/Heavy2.png  '); background-color:#0d2540;"></div>
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      <div class="slide-tag">EOT & Garder Cranes</div>
+      <h2>Heavy Lifting,<br><span>Precision Engineering</span></h2>
+      <p>Double Girder cranes up to 150T, Goliath cranes up to 100T — ERP-monitored quality at every stage.</p>
+      <a href="#services" class="slide-btn">View Crane Solutions →</a>
+    </div>
+  </div>
+
+  <!-- SLIDE 4 -->
+  <div class="slide" id="slide-4">
+    <!-- SLIDE 4 IMAGE: Replace 'assets/slide4.jpg' with your image path -->
+    <div class="slide-bg" style="background-image:url('assets/Solar.jpeg'); background-color:#101e35;"></div>
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      <div class="slide-tag">Industrial Drives (VFDs)</div>
+      <h2>Authorised <span>Yaskawa</span><br>Business Partner</h2>
+      <p>Optimise motor performance, reduce energy consumption & lower lifecycle costs with premium VFD solutions.</p>
+      <a href="#contact" class="slide-btn">Talk to an Expert →</a>
+    </div>
+  </div>
+
+  <!-- Navigation Arrows -->
+  <button class="slide-arrow prev" onclick="changeSlide(-1)" aria-label="Previous slide">&#8592;</button>
+  <button class="slide-arrow next" onclick="changeSlide(1)" aria-label="Next slide">&#8594;</button>
+
+  <!-- Dots -->
+  <div class="slide-dots">
+    <button class="slide-dot active" onclick="goToSlide(0)" aria-label="Slide 1"></button>
+    <button class="slide-dot" onclick="goToSlide(1)" aria-label="Slide 2"></button>
+    <button class="slide-dot" onclick="goToSlide(2)" aria-label="Slide 3"></button>
+    <button class="slide-dot" onclick="goToSlide(3)" aria-label="Slide 4"></button>
+  </div>
+</section>
 
 <!-- HERO -->
 <section class="hero">
@@ -1110,17 +1363,8 @@ footer {
     <div class="about-grid">
       <div class="about-visual">
         <div class="about-img-main">
-          <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="20" y="40" width="70" height="120" rx="4" fill="rgba(245,184,0,0.2)"/>
-            <rect x="110" y="60" width="70" height="100" rx="4" fill="rgba(245,184,0,0.15)"/>
-            <rect x="30" y="55" width="50" height="8" rx="2" fill="rgba(245,184,0,0.5)"/>
-            <rect x="30" y="70" width="50" height="8" rx="2" fill="rgba(245,184,0,0.35)"/>
-            <rect x="30" y="85" width="50" height="8" rx="2" fill="rgba(245,184,0,0.35)"/>
-            <circle cx="45" cy="130" r="10" fill="rgba(245,184,0,0.4)"/>
-            <circle cx="75" cy="130" r="10" fill="rgba(245,184,0,0.25)"/>
-            <rect x="120" y="75" width="50" height="8" rx="2" fill="rgba(245,184,0,0.4)"/>
-            <rect x="120" y="90" width="50" height="8" rx="2" fill="rgba(245,184,0,0.25)"/>
-          </svg>
+          <!-- ABOUT IMAGE: Replace src with your actual image path e.g. "assets/about-factory.jpg" -->
+          <img src="assets/about_fact.png" alt="Techvera Factory / Office" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
         </div>
         <div class="about-badge">
           <div class="num">5+</div>
@@ -1515,13 +1759,8 @@ footer {
   <div class="footer-inner">
     <div class="footer-brand">
       <div class="logo">
-        <div class="logo-icon">
-          <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" fill="#0d1f3c"/><path d="M10 20 L20 10 L30 20 L20 30 Z" fill="#f5b800" opacity="0.9"/><circle cx="20" cy="20" r="5" fill="#0d1f3c"/></svg>
-        </div>
-        <div class="logo-text">
-          <div class="name">TECHVERA</div>
-          <div class="tagline">Solutions Pvt. Ltd.</div>
-        </div>
+        <!-- FOOTER LOGO IMAGE: Replace src with your actual logo file path e.g. "assets/logo-white.png" -->
+        <img src="assets/logo_white.jpeg" alt="Techvera Solutions Logo" class="logo-img logo-img-footer">
       </div>
       <p>"Where Technology Meets Trust." — Techvera Solutions Private Limited is a reliable service and solution provider across industries, serving Pan India with quality, efficiency, and customer satisfaction.</p>
       <div class="footer-social">
@@ -1570,6 +1809,71 @@ footer {
     <p>Designed with ❤️ for <a href="#">Techvera Solutions</a></p>
   </div>
 </footer>
+
+<!-- ═══════════════════════════════════════════
+     WHATSAPP CHAT BUTTON
+     HOW TO USE: Replace the phone number in the href below.
+     Format: https://wa.me/91XXXXXXXXXX
+     Change "91" (India code) + your 10-digit number.
+     The "text" parameter pre-fills the message.
+═══════════════════════════════════════════ -->
+<div class="whatsapp-float">
+  <div style="position:relative;display:inline-block;">
+    <div class="whatsapp-pulse"></div>
+    <!-- WHATSAPP LINK: Replace +917065200225 with your WhatsApp number -->
+    <a href="https://wa.me/917065200225?text=Hello%20Techvera%20Solutions!%20I%20would%20like%20to%20know%20more%20about%20your%20services."
+       target="_blank"
+       rel="noopener noreferrer"
+       class="whatsapp-btn"
+       aria-label="Chat on WhatsApp">
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16 2C8.268 2 2 8.268 2 16c0 2.44.638 4.73 1.755 6.718L2 30l7.494-1.717A13.93 13.93 0 0 0 16 30c7.732 0 14-6.268 14-14S23.732 2 16 2z" fill="#fff"/>
+        <path d="M16 4.4c-6.4 0-11.6 5.2-11.6 11.6 0 2.14.584 4.147 1.6 5.868L4.8 27.2l5.468-1.168A11.56 11.56 0 0 0 16 27.6c6.4 0 11.6-5.2 11.6-11.6S22.4 4.4 16 4.4zm5.732 16.532c-.24.668-1.4 1.268-1.932 1.332-.504.068-1.132.096-1.828-.116-.42-.132-.96-.308-1.648-.604-2.9-1.252-4.8-4.18-4.948-4.372-.148-.192-1.2-1.596-1.2-3.044s.764-2.16 1.032-2.456c.268-.296.584-.372.78-.372.196 0 .392.002.564.01.18.008.424-.068.664.508.248.588.84 2.04.916 2.188.076.148.124.32.024.516-.096.196-.144.316-.284.488-.14.172-.296.384-.42.516-.14.14-.284.292-.122.572.162.28.72 1.188 1.548 1.924 1.064.948 1.96 1.24 2.24 1.38.28.14.444.116.608-.07.164-.188.7-.816.884-1.096.184-.28.368-.232.62-.14.252.092 1.596.752 1.868.888.272.136.452.204.52.316.068.112.068.648-.172 1.312z" fill="#25D366"/>
+      </svg>
+      <span>Chat with Us</span>
+    </a>
+  </div>
+</div>
+
+<script>
+// ─── SLIDESHOW SCRIPT ───────────────────────────────
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
+const dots = document.querySelectorAll('.slide-dot');
+let autoSlideTimer;
+
+function showSlide(index) {
+  slides.forEach(s => s.classList.remove('active'));
+  dots.forEach(d => d.classList.remove('active'));
+  currentSlide = (index + slides.length) % slides.length;
+  slides[currentSlide].classList.add('active');
+  dots[currentSlide].classList.add('active');
+}
+
+function changeSlide(dir) {
+  showSlide(currentSlide + dir);
+  resetTimer();
+}
+
+function goToSlide(index) {
+  showSlide(index);
+  resetTimer();
+}
+
+function resetTimer() {
+  clearInterval(autoSlideTimer);
+  autoSlideTimer = setInterval(() => showSlide(currentSlide + 1), 5000);
+}
+
+// Auto-advance every 5 seconds
+autoSlideTimer = setInterval(() => showSlide(currentSlide + 1), 5000);
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowLeft') changeSlide(-1);
+  if (e.key === 'ArrowRight') changeSlide(1);
+});
+</script>
 
 </body>
 </html>
