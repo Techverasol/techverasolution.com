@@ -246,16 +246,18 @@ nav {
   gap: 14px;
 }
 .hero-card {
-  background: rgba(255,255,255,0.06);
   border: 1px solid rgba(245,184,0,0.2);
   border-radius: 8px;
   padding: 22px 18px;
   transition: all 0.3s;
+  background-size: cover;
+  background-position: center;
+  background-color: rgba(255,255,255,0.06); /* Fallback */
 }
 .hero-card:hover {
-  background: rgba(245,184,0,0.1);
   border-color: var(--gold);
   transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
 .hero-card-icon {
   width: 40px; height: 40px;
@@ -1421,28 +1423,28 @@ footer {
       </div>
     </div>
     <div class="hero-cards">
-      <div class="hero-card">
+      <div class="hero-card" style="background-image: linear-gradient(rgba(13, 31, 60, 0.6), rgba(13, 31, 60, 0.85)), url('assets/Solutions/Electrical_Panels_&_Solutions.webp');">
         <div class="hero-card-icon">
           <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
         </div>
         <h3>Electrical Panels</h3>
         <p>LV switchgear, control gear & power factor solutions</p>
       </div>
-      <div class="hero-card">
+      <div class="hero-card" style="background-image: linear-gradient(rgba(13, 31, 60, 0.6), rgba(13, 31, 60, 0.85)), url('assets/Solutions/EOT_&_Garder_Cranes.webp');">
         <div class="hero-card-icon">
           <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm0-12a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg>
         </div>
         <h3>EOT Cranes</h3>
         <p>Double girder, Golliath & specialized cranes up to 150T</p>
       </div>
-      <div class="hero-card">
+      <div class="hero-card" style="background-image: linear-gradient(rgba(13, 31, 60, 0.6), rgba(13, 31, 60, 0.85)), url('assets/Solutions/Solar_Energy_Solutions.webp');">
         <div class="hero-card-icon">
           <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
         </div>
         <h3>Solar Solutions</h3>
         <p>End-to-end solar consultancy & installation projects</p>
       </div>
-      <div class="hero-card">
+      <div class="hero-card" style="background-image: linear-gradient(rgba(13, 31, 60, 0.6), rgba(13, 31, 60, 0.85)), url('assets/Solutions/Surveillance_Systems.webp');">
         <div class="hero-card-icon">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M5.34 18.66l-1.41 1.41M20 12h2M2 12h2M19.07 19.07l-1.41-1.41M5.34 5.34L3.93 3.93M12 20v2M12 2v2"/></svg>
         </div>
