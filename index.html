@@ -72,33 +72,29 @@ nav {
   gap: 12px;
   text-decoration: none;
 }
-/* Legacy logo-icon/logo-text kept in case used elsewhere */
-.logo-icon {
-  width: 48px;
-  height: 48px;
-  background: var(--gold);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
+.logo-img {
+  height: 54px;
+  width: auto;
+  display: block;
+  object-fit: contain;
 }
-.logo-icon svg { width: 30px; height: 30px; }
-.logo-text { line-height: 1.1; }
-.logo-text .name {
-  font-family: 'Rajdhani', sans-serif;
-  font-weight: 700;
-  font-size: 1.4rem;
-  color: var(--navy);
-  letter-spacing: 1px;
+
+/* Hamburger Icon */
+.hamburger {
+  display: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 1000;
 }
-.logo-text .tagline {
-  font-size: 0.65rem;
-  color: var(--gray);
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background-color: var(--navy);
+  border-radius: 2px;
+  transition: all 0.3s ease;
 }
+
 .nav-links {
   display: flex;
   gap: 0;
@@ -476,10 +472,12 @@ nav {
   border-color: var(--gold);
 }
 .service-card-top {
-  background: var(--navy);
+  background-color: var(--navy); /* Fallback */
   padding: 30px 24px 24px;
   position: relative;
   overflow: hidden;
+  background-size: cover;
+  background-position: center;
 }
 .service-card-top::after {
   content: '';
@@ -494,7 +492,7 @@ nav {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 4rem;
   font-weight: 800;
-  color: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.1);
   position: absolute;
   top: 10px; right: 16px;
   line-height: 1;
@@ -505,6 +503,8 @@ nav {
   border-radius: 8px;
   display: flex; align-items: center; justify-content: center;
   margin-bottom: 14px;
+  position: relative;
+  z-index: 2;
 }
 .service-icon svg { width: 26px; height: 26px; fill: var(--navy); }
 .service-card-top h3 {
@@ -514,6 +514,8 @@ nav {
   color: var(--white);
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  position: relative;
+  z-index: 2;
 }
 .service-card-body {
   padding: 28px 24px 24px;
@@ -572,6 +574,16 @@ nav {
 }
 .partner-logo:last-child { border-right: none; }
 .partner-logo:hover { background: rgba(245,184,0,0.08); }
+.partner-img {
+  height: 40px;
+  width: auto;
+  max-width: 100%;
+  margin: 0 auto 10px;
+  display: block;
+  object-fit: contain;
+  transition: transform 0.3s;
+}
+.partner-logo:hover .partner-img { transform: scale(1.05); }
 .partner-logo span {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 1.6rem;
@@ -890,15 +902,15 @@ nav {
 }
 .btn-submit:hover { background: var(--gold-light); }
 .success-message {
-            display: none;
-            padding: 20px;
-            background: rgba(0, 255, 174, 0.1);
-            border-radius: 12px;
-            color: #00ffae;
-            border: 1px solid rgba(0, 255, 174, 0.2);
-            margin-top: 20px;
-            animation: fadeIn 0.5s ease forwards;
-        }
+  display: none;
+  padding: 20px;
+  background: rgba(0, 255, 174, 0.1);
+  border-radius: 12px;
+  color: #00ffae;
+  border: 1px solid rgba(0, 255, 174, 0.2);
+  margin-top: 20px;
+  animation: fadeIn 0.5s ease forwards;
+}
 
 /* ─── FOOTER ─── */
 footer {
@@ -986,26 +998,9 @@ footer {
 .hero-inner > * { animation: fadeUp 0.7s ease both; }
 .hero-inner > *:nth-child(2) { animation-delay: 0.2s; }
 
-/* ─── RESPONSIVE ─── */
-@media (max-width: 900px) {
-  .hero-inner, .about-grid, .why-grid, .contact-grid, .footer-inner {
-    grid-template-columns: 1fr;
-  }
-  .services-grid { grid-template-columns: 1fr 1fr; }
-  .stats-inner { grid-template-columns: repeat(2,1fr); }
-  .hero-accent { display: none; }
-  nav .nav-links { display: none; }
-}
 /* ─── LOGO IMAGE ─── */
-.logo-img {
-  height: 54px;
-  width: auto;
-  display: block;
-  object-fit: contain;
-}
 .logo-img-footer {
   height: 46px;
-  /* filter: brightness(0) invert(1); makes dark logo white for footer – remove if logo is already light */
 }
 
 /* ─── SLIDESHOW ─── */
@@ -1034,7 +1029,6 @@ footer {
   transition: transform 6s ease;
 }
 .slide.active .slide-bg { transform: scale(1.05); }
-/* SLIDE IMAGES: Each slide-bg has a background-image set inline below */
 .slide-overlay {
   position: absolute;
   inset: 0;
@@ -1092,7 +1086,6 @@ footer {
   transition: background 0.2s;
 }
 .slide-btn:hover { background: var(--white); }
-/* Dots */
 .slide-dots {
   position: absolute;
   bottom: 22px;
@@ -1112,7 +1105,6 @@ footer {
   padding: 0;
 }
 .slide-dot.active { background: var(--gold); transform: scale(1.3); }
-/* Arrows */
 .slide-arrow {
   position: absolute;
   top: 50%;
@@ -1181,21 +1173,149 @@ footer {
   50% { transform: scale(1.5); opacity: 0; }
 }
 
+/* ═══════════════════════════════════════════
+   RESPONSIVE DESIGN (MOBILE & TABLET FIXES)
+═══════════════════════════════════════════ */
+
+@media (max-width: 1024px) {
+  .hero-inner, .about-grid, .why-grid, .contact-grid {
+    gap: 40px;
+  }
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 900px) {
-  .slideshow { height: 380px; }
-  .slide-content h2 { font-size: 2rem; }
+  /* Top Bar Adjustments */
+  .top-bar .inner {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+  .top-bar a {
+    margin: 0 10px;
+  }
+
+  /* Navbar Adjustments - HAMBURGER MENU */
+  nav .nav-inner {
+    position: relative;
+    padding: 0 24px;
+  }
+  
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 72px;
+    left: 0;
+    width: 100%;
+    background: var(--white);
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  }
+
+  .nav-links.active {
+    max-height: 400px;
+    padding: 15px 0;
+  }
+
+  .nav-links > li {
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-links > li > a {
+    padding: 12px;
+    font-size: 1rem;
+  }
+  
+  /* Hamburger Animation */
+  .hamburger.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  /* Grid Reductions */
+  .hero-inner, .about-grid, .why-grid, .contact-grid, .footer-inner {
+    grid-template-columns: 1fr;
+  }
+  .stats-inner { grid-template-columns: repeat(2, 1fr); }
+  .hero-accent { display: none; }
+
+  /* Slideshow */
+  .slideshow { height: 420px; }
+  .slide-content h2 { font-size: 2.5rem; }
   .slide-arrow { display: none; }
+  
+  /* WhatsApp Button */
   .whatsapp-btn span { display: none; }
   .whatsapp-btn { padding: 13px; border-radius: 50%; }
+  .whatsapp-btn svg { margin: 0; }
 }
+
 @media (max-width: 600px) {
-  .slideshow { height: 300px; }
+  /* Spacing Reductions */
+  .section { padding: 60px 0; }
+  .slideshow { height: 380px; }
+  .slide-content h2 { font-size: 2rem; }
+  
+  /* Full Stack Grids */
+  .hero-cards, .services-grid, .cert-grid, .form-row, .stats-inner { 
+    grid-template-columns: 1fr; 
+  }
+  
+  /* Stats Bar Formatting */
+  .stat-item { 
+    border-right: none; 
+    border-bottom: 1px solid rgba(13,31,60,0.15); 
+  }
+  .stat-item:last-child { border-bottom: none; }
+
+  /* CTA Section */
+  .cta-inner { 
+    flex-direction: column; 
+    text-align: center; 
+    align-items: center; 
+  }
+  .cta-actions { justify-content: center; }
+  
+  /* Visuals Adjustments */
+  .about-badge {
+     position: static;
+     margin-top: 20px;
+     display: inline-block;
+  }
+  .why-visual { padding: 30px 20px; }
+  .contact-form { padding: 24px 20px; }
+  
+  /* Footer Formatting */
+  .footer-inner { gap: 30px; }
+  .footer-bottom { 
+    flex-direction: column; 
+    text-align: center; 
+    gap: 15px; 
+  }
+  
+  /* Links */
+  .top-bar a { display: inline-block; margin-bottom: 5px; }
 }
 </style>
 </head>
 <body>
 
-<!-- TOP BAR -->
 <div class="top-bar">
   <div class="inner">
     <span>📍 Head Office: A-178, Kalkaji, New Delhi - 110019</span>
@@ -1207,14 +1327,19 @@ footer {
   </div>
 </div>
 
-<!-- NAVBAR -->
 <nav>
   <div class="nav-inner">
     <a href="#" class="logo">
-      <!-- LOGO IMAGE: Replace src with your actual logo file path e.g. "assets/logo.png" -->
       <img src="techvera.jpeg" alt="Techvera Solutions Logo" class="logo-img">
     </a>
-    <ul class="nav-links">
+    
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <ul class="nav-links" id="nav-links">
       <li><a href="#about">About Us</a></li>
       <li><a href="#services">Services</a></li>
       <li><a href="#products">Products</a></li>
@@ -1224,17 +1349,9 @@ footer {
   </div>
 </nav>
 
-<!-- ═══════════════════════════════════════════
-     SLIDESHOW
-     HOW TO ADD YOUR OWN IMAGES:
-     In each .slide-bg below, change the style="background-image:url('assets/slideX.jpg')"
-     to point to your actual image file. Recommended size: 1600×700px.
-═══════════════════════════════════════════ -->
 <section class="slideshow" id="slideshow">
 
-  <!-- SLIDE 1 -->
   <div class="slide active" id="slide-1">
-    <!-- SLIDE 1 IMAGE: Replace 'assets/slide1.jpg' with your image path -->
     <div class="slide-bg" style="background-image:url('assets/factory_2.png'); background-color:#0d1f3c;"></div>
     <div class="slide-overlay"></div>
     <div class="slide-content">
@@ -1245,9 +1362,7 @@ footer {
     </div>
   </div>
 
-  <!-- SLIDE 2 -->
   <div class="slide" id="slide-2">
-    <!-- SLIDE 2 IMAGE: Replace 'assets/slide2.jpg' with your image path -->
     <div class="slide-bg" style="background-image:url('assets/Solar_rP_2.png'); background-color:#163060;"></div>
     <div class="slide-overlay"></div>
     <div class="slide-content">
@@ -1258,9 +1373,7 @@ footer {
     </div>
   </div>
 
-  <!-- SLIDE 3 -->
   <div class="slide" id="slide-3">
-    <!-- SLIDE 3 IMAGE: Replace 'assets/slide3.jpg' with your image path -->
     <div class="slide-bg" style="background-image:url('assets/Heavy2.png  '); background-color:#0d2540;"></div>
     <div class="slide-overlay"></div>
     <div class="slide-content">
@@ -1271,9 +1384,7 @@ footer {
     </div>
   </div>
 
-  <!-- SLIDE 4 -->
   <div class="slide" id="slide-4">
-    <!-- SLIDE 4 IMAGE: Replace 'assets/slide4.jpg' with your image path -->
     <div class="slide-bg" style="background-image:url('assets/Solar.jpeg'); background-color:#101e35;"></div>
     <div class="slide-overlay"></div>
     <div class="slide-content">
@@ -1284,11 +1395,9 @@ footer {
     </div>
   </div>
 
-  <!-- Navigation Arrows -->
   <button class="slide-arrow prev" onclick="changeSlide(-1)" aria-label="Previous slide">&#8592;</button>
   <button class="slide-arrow next" onclick="changeSlide(1)" aria-label="Next slide">&#8594;</button>
 
-  <!-- Dots -->
   <div class="slide-dots">
     <button class="slide-dot active" onclick="goToSlide(0)" aria-label="Slide 1"></button>
     <button class="slide-dot" onclick="goToSlide(1)" aria-label="Slide 2"></button>
@@ -1297,7 +1406,6 @@ footer {
   </div>
 </section>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-pattern"></div>
   <div class="hero-bg"></div>
@@ -1345,7 +1453,6 @@ footer {
   </div>
 </section>
 
-<!-- STATS BAR -->
 <div class="stats-bar">
   <div class="stats-inner">
     <div class="stat-item">
@@ -1367,13 +1474,11 @@ footer {
   </div>
 </div>
 
-<!-- ABOUT -->
 <section class="section about" id="about">
   <div class="section-inner">
     <div class="about-grid">
       <div class="about-visual">
         <div class="about-img-main">
-          <!-- ABOUT IMAGE: Replace src with your actual image path e.g. "assets/about-factory.jpg" -->
           <img src="assets/about_fact.png" alt="Techvera Factory / Office" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
         </div>
         <div class="about-badge">
@@ -1428,7 +1533,6 @@ footer {
   </div>
 </section>
 
-<!-- SERVICES -->
 <section class="section services" id="services">
   <div class="section-inner">
     <div class="services-header">
@@ -1440,8 +1544,9 @@ footer {
       <a href="#contact" class="btn-primary" style="white-space:nowrap">Request a Quote →</a>
     </div>
     <div class="services-grid" id="products">
+      
       <div class="service-card">
-        <div class="service-card-top">
+        <div class="service-card-top" style="background-image: linear-gradient(rgba(13, 31, 60, 0.4), rgba(13, 31, 60, 0.7)), url('assets/Solutions/Electrical_Panels_&_Solutions.png');">
           <div class="service-num">01</div>
           <div class="service-icon">
             <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
@@ -1459,8 +1564,9 @@ footer {
           </div>
         </div>
       </div>
+
       <div class="service-card">
-        <div class="service-card-top">
+        <div class="service-card-top" style="background-image: linear-gradient(rgba(13, 31, 60, 0.4), rgba(13, 31, 60, 0.7)), url('assets/Solutions/Industrial_Drives.png');">
           <div class="service-num">02</div>
           <div class="service-icon">
             <svg viewBox="0 0 24 24"><path d="M20 7h-7M14 5v14M4 5l6 7-6 7"/></svg>
@@ -1477,8 +1583,9 @@ footer {
           </div>
         </div>
       </div>
+
       <div class="service-card">
-        <div class="service-card-top">
+        <div class="service-card-top" style="background-image: linear-gradient(rgba(13, 31, 60, 0.4), rgba(13, 31, 60, 0.7)), url('assets//Solutions/Solar_Energy_Solutions.png');">
           <div class="service-num">03</div>
           <div class="service-icon">
             <svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
@@ -1496,8 +1603,9 @@ footer {
           </div>
         </div>
       </div>
+
       <div class="service-card">
-        <div class="service-card-top">
+          <div class="service-card-top" style="background-image: linear-gradient(rgba(13, 31, 60, 0.4), rgba(13, 31, 60, 0.7)), url('assets/Solutions/EOT_&_Garder_Cranes.png');">
           <div class="service-num">04</div>
           <div class="service-icon">
             <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
@@ -1514,8 +1622,9 @@ footer {
           </div>
         </div>
       </div>
+
       <div class="service-card">
-        <div class="service-card-top">
+          <div class="service-card-top" style="background-image: linear-gradient(rgba(13, 31, 60, 0.4), rgba(13, 31, 60, 0.7)), url('assets/Solutions/Surveillance_Systems.png');">
           <div class="service-num">05</div>
           <div class="service-icon">
             <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v3M12 20v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M1 12h3M20 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
@@ -1533,8 +1642,9 @@ footer {
           </div>
         </div>
       </div>
+
       <div class="service-card">
-        <div class="service-card-top">
+        <div class="service-card-top" style="background-image: linear-gradient(rgba(13, 31, 60, 0.4), rgba(13, 31, 60, 0.7)), url('assets/Solutions/Spares_Repair_AMC.png');">
           <div class="service-num">06</div>
           <div class="service-icon">
             <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
@@ -1551,40 +1661,52 @@ footer {
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
 
-<!-- TECHNOLOGY PARTNERS -->
 <section class="partners" id="partners">
   <div class="partners-inner">
     <h2>Technology <span>Partners</span></h2>
     <div class="partners-logos">
       <div class="partner-logo">
+        <img src="assets/Partner_Logo/Vikram.png" alt="ABB" class="partner-img">
+        <span>Vikram Solar</span>
+        <small>Partner</small>
+      </div>
+      <div class="partner-logo">
+        <img src="assets/Partner_Logo/ABB.png" alt="ABB" class="partner-img">
         <span>ABB</span>
         <small>Partner</small>
       </div>
       <div class="partner-logo">
+        <img src="assets/Partner_Logo/L&T.png" alt="L&T" class="partner-img">
         <span>L&T</span>
         <small>Partner</small>
       </div>
       <div class="partner-logo">
+        <img src="assets/Partner_Logo/Schneider.png" alt="Schneider" class="partner-img">
         <span>SCHNEIDER</span>
         <small>Electric</small>
       </div>
       <div class="partner-logo">
+        <img src="assets/Partner_Logo/SIEMENS.png" alt="Siemens" class="partner-img">
         <span>SIEMENS</span>
         <small>Partner</small>
       </div>
       <div class="partner-logo">
+        <img src="assets/Partner_Logo/Yaskawa.png" alt="Yaskawa" class="partner-img">
         <span>YASKAWA</span>
         <small>Auth. Business Partner</small>
       </div>
       <div class="partner-logo">
+        <img src="assets/Partner_Logo/Adani.png" alt="Adani" class="partner-img">
         <span>ADANI</span>
         <small>Solar Partner</small>
       </div>
       <div class="partner-logo">
+        <img src="assets/Partner_Logo/WAAREE.png" alt="Waaree" class="partner-img">
         <span>WAAREE</span>
         <small>Solar Partner</small>
       </div>
@@ -1592,7 +1714,6 @@ footer {
   </div>
 </section>
 
-<!-- WHY US -->
 <section class="section why">
   <div class="section-inner">
     <div class="why-grid">
@@ -1661,7 +1782,6 @@ footer {
   </div>
 </section>
 
-<!-- CTA -->
 <section class="cta-section">
   <div class="cta-inner">
     <div class="cta-text">
@@ -1675,7 +1795,6 @@ footer {
   </div>
 </section>
 
-<!-- CONTACT -->
 <section class="section contact" id="contact">
   <div class="section-inner">
     <div class="contact-grid">
@@ -1813,95 +1932,13 @@ footer {
 
   </div>
 </form>
-
-<script>
-  const form = document.getElementById("contact-form");
-  const successMessage = document.getElementById("successMessage");
-  const submitBtn = document.getElementById("submitBtn");
-
-  form.addEventListener("submit", async function (e) {
-    e.preventDefault();
-
-    submitBtn.disabled = true;
-    submitBtn.innerText = "Sending...";
-
-    const formData = new FormData(form);
-
-    try {
-      const response = await fetch(form.action, {
-        method: form.method,
-        body: formData,
-        headers: {
-          Accept: "application/json"
-        }
-      });
-
-      if (response.ok) {
-        successMessage.style.display = "block";
-        form.reset();
-
-        submitBtn.disabled = false;
-        submitBtn.innerText = "Send Enquiry →";
-      } else {
-        alert("Something went wrong. Please try again.");
-
-        submitBtn.disabled = false;
-        submitBtn.innerText = "Send Enquiry →";
-      }
-
-    } catch (error) {
-      alert("Network error. Please try again.");
-
-      submitBtn.disabled = false;
-      submitBtn.innerText = "Send Enquiry →";
-    }
-  });
-</script>
   </div>
 
 </section>
-<script>
-        const form = document.getElementById('contact-form');
-        const successMessage = document.getElementById('successMessage');
-        const submitBtn = document.getElementById('submitBtn');
-
-        form.addEventListener('submit', async function(event) {
-            event.preventDefault();
-            
-            // UI Feedback
-            submitBtn.innerText = 'Sending...';
-            submitBtn.disabled = true;
-
-            const formData = new FormData(form);
-
-            try {
-                const response = await fetch(form.action, {
-                    method: form.method,
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-
-                if (response.ok) {
-                    form.style.display = 'none'; // Hide form on success
-                    successMessage.style.display = 'block';
-                } else {
-                    throw new Error();
-                }
-            } catch (error) {
-                alert('Oops! There was a problem. Please try again.');
-                submitBtn.innerText = 'Notify Me';
-                submitBtn.disabled = false;
-            }
-        });
-    </script>
-<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
       <div class="logo">
-        <!-- FOOTER LOGO IMAGE: Replace src with your actual logo file path e.g. "assets/logo-white.png" -->
         <img src="assets/logo_white.jpeg" alt="Techvera Solutions Logo" class="logo-img logo-img-footer">
       </div>
       <p>"Where Technology Meets Trust." — Techvera Solutions Private Limited is a reliable service and solution provider across industries, serving Pan India with quality, efficiency, and customer satisfaction.</p>
@@ -1952,18 +1989,10 @@ footer {
   </div>
 </footer>
 
-<!-- ═══════════════════════════════════════════
-     WHATSAPP CHAT BUTTON
-     HOW TO USE: Replace the phone number in the href below.
-     Format: https://wa.me/91XXXXXXXXXX
-     Change "91" (India code) + your 10-digit number.
-     The "text" parameter pre-fills the message.
-═══════════════════════════════════════════ -->
 <div class="whatsapp-float">
   <div style="position:relative;display:inline-block;">
     <div class="whatsapp-pulse"></div>
-    <!-- WHATSAPP LINK: Replace +917065200225 with your WhatsApp number -->
-    <a href="https://wa.me/918796091225?text=Hello%20Techvera%20Solutions!%20I%20would%20like%20to%20know%20more%20about%20your%20services."
+    <a href="https://wa.me/917065200225?text=Hello%20Techvera%20Solutions!%20I%20would%20like%20to%20know%20more%20about%20your%20services."
        target="_blank"
        rel="noopener noreferrer"
        class="whatsapp-btn"
@@ -1978,6 +2007,49 @@ footer {
 </div>
 
 <script>
+// ─── CONTACT FORM SCRIPT ──────────────────────────────
+const form = document.getElementById("contact-form");
+const successMessage = document.getElementById("successMessage");
+const submitBtn = document.getElementById("submitBtn");
+
+form.addEventListener("submit", async function (e) {
+  e.preventDefault();
+
+  submitBtn.disabled = true;
+  submitBtn.innerText = "Sending...";
+
+  const formData = new FormData(form);
+
+  try {
+    const response = await fetch(form.action, {
+      method: form.method,
+      body: formData,
+      headers: {
+        Accept: "application/json"
+      }
+    });
+
+    if (response.ok) {
+      successMessage.style.display = "block";
+      form.reset();
+
+      submitBtn.disabled = false;
+      submitBtn.innerText = "Send Enquiry →";
+    } else {
+      alert("Something went wrong. Please try again.");
+
+      submitBtn.disabled = false;
+      submitBtn.innerText = "Send Enquiry →";
+    }
+
+  } catch (error) {
+    alert("Network error. Please try again.");
+
+    submitBtn.disabled = false;
+    submitBtn.innerText = "Send Enquiry →";
+  }
+});
+
 // ─── SLIDESHOW SCRIPT ───────────────────────────────
 let currentSlide = 0;
 const slides = document.querySelectorAll('.slide');
@@ -2014,6 +2086,25 @@ autoSlideTimer = setInterval(() => showSlide(currentSlide + 1), 5000);
 document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowLeft') changeSlide(-1);
   if (e.key === 'ArrowRight') changeSlide(1);
+});
+
+// ─── MOBILE HAMBURGER MENU SCRIPT ───────────────────
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('nav-links');
+const navItems = document.querySelectorAll('.nav-links li a');
+
+// Toggle menu on click
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('active');
+  navLinks.classList.toggle('active');
+});
+
+// Close menu when a link is clicked
+navItems.forEach(item => {
+  item.addEventListener('click', () => {
+    hamburger.classList.remove('active');
+    navLinks.classList.remove('active');
+  });
 });
 </script>
 
